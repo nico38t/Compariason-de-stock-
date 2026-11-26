@@ -3,6 +3,201 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a35">
+  <title>Comparaison de stocks</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="xlsx.full.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Comparaison de stocks, accueil">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" fill="none">
+            <path d="M12 5h16l9 11-17 20L3 16 12 5Z" fill="currentColor" opacity=".18"/>
+            <path d="M12 5h16l9 11-17 20L3 16 12 5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="m3 16 34 0M12 5l8 31 8-31M12 5l-9 11m25-11 9 11" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">STOCK<span>STUDIO</span></span>
+      </a>
+      <span class="topbar-tag"><span class="online-dot"></span> Outil de contrôle</span>
+    </header>
+
+
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> PRÉCISION, EN UN COUP D’ŒIL</p>
+        <h1 id="title">Vos stocks.<br><span>En parfaite harmonie.</span></h1>
+        <p class="intro">
+          Comparez votre stock actuel à votre fichier de référence, repérez les écarts et vérifiez chaque ajustement avant l’export.
+        </p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <span class="orb orb-one"></span>
+        <span class="orb orb-two"></span>
+        <svg class="hero-crystal" viewBox="0 0 180 180" fill="none">
+          <path d="M55 18h70l39 48-74 96L16 66l39-48Z" fill="url(#crystal-fill)" fill-opacity=".16" stroke="url(#crystal-stroke)" stroke-width="2"/>
+          <path d="M16 66h148M55 18l35 144 35-144M55 18 16 66m109-48 39 48" stroke="url(#crystal-stroke)" stroke-width="1.6"/>
+          <defs>
+            <linearGradient id="crystal-fill" x1="20" y1="20" x2="165" y2="155" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#54dcff"/></linearGradient>
+            <linearGradient id="crystal-stroke" x1="24" y1="18" x2="159" y2="150" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#52d8ff" stop-opacity=".28"/></linearGradient>
+          </defs>
+        </svg>
+        <span class="sparkle sparkle-one">✦</span>
+        <span class="sparkle sparkle-two">✧</span>
+      </div>
+      <div class="hero-foot">
+        <span class="hero-foot-icon" aria-hidden="true">✓</span>
+        <span>Vos fichiers restent sur cet appareil.</span>
+        <span class="hero-foot-divider"></span>
+        <span>Rien n’est envoyé en ligne.</span>
+      </div>
+    </section>
+
+
+    <section class="workspace" aria-labelledby="uploadTitle">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">ÉTAPE 01 <span>—</span> IMPORT</p>
+          <h2 id="uploadTitle">Préparez votre comparaison</h2>
+        </div>
+        <span class="file-format">XLSX <i>·</i> XLS <i>·</i> CSV</span>
+      </div>
+      <p class="section-description">Chaque fichier doit contenir les références en première colonne et les quantités en deuxième colonne.</p>
+
+
+      <div class="files">
+        <div class="file-box" data-file-box>
+          <div class="file-heading">
+            <span class="step-number">01</span>
+            <div>
+              <label for="comparisonFile">Stock à comparer</label>
+              <p class="hint">Votre inventaire actuel</p>
+            </div>
+          </div>
+          <label class="file-drop" for="comparisonFile">
+            <input id="comparisonFile" type="file" accept=".xlsx,.xls,.csv">
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="file-copy">
+              <strong class="file-name" data-empty-label>Choisir un fichier</strong>
+              <small class="file-detail">ou déposer ici</small>
+            </span>
+            <span class="file-state" aria-hidden="true">REQUIS</span>
+          </label>
+        </div>
+
+
+        <div class="file-box" data-file-box>
+          <div class="file-heading">
+            <span class="step-number step-two">02</span>
+            <div>
+              <label for="truthFile">Fichier de vérité</label>
+              <p class="hint">Votre stock de référence</p>
+            </div>
+          </div>
+          <label class="file-drop" for="truthFile">
+            <input id="truthFile" type="file" accept=".xlsx,.xls,.csv">
+            <span class="upload-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="file-copy">
+              <strong class="file-name" data-empty-label>Choisir un fichier</strong>
+              <small class="file-detail">ou déposer ici</small>
+            </span>
+            <span class="file-state" aria-hidden="true">REQUIS</span>
+          </label>
+        </div>
+      </div>
+
+
+      <div class="action-row">
+        <button id="compareButton" type="button" disabled>
+          <span>Comparer les stocks</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h12m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="action-hint" id="actionHint">Ajoutez les deux fichiers pour commencer.</p>
+        <button id="installButton" class="install-button" type="button" hidden>Installer l’application</button>
+      </div>
+
+
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+    </section>
+
+
+    <section id="results" class="results" aria-labelledby="resultsTitle" hidden>
+      <div class="results-heading">
+        <div>
+          <p class="section-kicker">ÉTAPE 02 <span>—</span> VÉRIFICATION</p>
+          <h2 id="resultsTitle">Aperçu de vos ajustements</h2>
+          <p class="results-description">Vérifiez les différences ci-dessous avant d’exporter votre fichier.</p>
+        </div>
+        <button id="exportButton" class="export-button" type="button" disabled>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v9m0 0 3.5-3.5M10 12 6.5 8.5M4 13v3h12v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Exporter les ajustements</span>
+        </button>
+      </div>
+      <div class="stats" aria-label="Résumé de la comparaison">
+        <article class="stat-card stat-blue">
+          <span class="stat-label">RÉFÉRENCES VÉRIFIÉES</span>
+          <strong id="checkedCount">—</strong>
+          <span class="stat-note">au total</span>
+        </article>
+        <article class="stat-card stat-amber">
+          <span class="stat-label">ÉCARTS À EXAMINER</span>
+          <strong id="differenceCount">—</strong>
+          <span class="stat-note">référence(s)</span>
+        </article>
+        <article class="stat-card stat-green">
+          <span class="stat-label">RÉSULTAT</span>
+          <strong id="resultStatus">—</strong>
+          <span class="stat-note" id="resultNote">en attente</span>
+        </article>
+      </div>
+      <div class="table-card">
+        <div class="table-topline">
+          <span class="table-title">Détail des différences</span>
+          <span class="preview-tag"><span></span> APERÇU AVANT EXPORT</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Référence</th>
+                <th>Stock à comparer</th>
+                <th>Stock vérité</th>
+                <th>Écart <span>(comparé − vérité)</span></th>
+                <th>Ajustement recommandé</th>
+                <th>État</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </div>
+      <p class="preview-note"><span aria-hidden="true">✦</span> L’export contient uniquement les références avec un écart. Vérifiez les quantités avant de continuer.</p>
+    </section>
+
+
+    <footer class="footer">
+      <span class="footer-mark" aria-hidden="true">◇</span>
+      <span>Un contrôle clair. Des décisions en confiance.</span>
+      <span class="footer-private">Traitement local <span>·</span> Aucune donnée transmise</span>
+    </footer>
+  </main>
+</body>
+</html>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#155eef">
   <title>Comparaison de stocks</title>
   <link rel="manifest" href="manifest.webmanifest">
