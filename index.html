@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#155eef">
+  <title>Comparaison de stocks</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="xlsx.full.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <section class="card" aria-labelledby="title">
+      <h1 id="title">Comparaison de stocks</h1>
+      <p class="intro">
+        Comparez votre stock actuel à un fichier de vérité et exportez uniquement les références à ajuster.
+        Chaque fichier doit contenir une colonne de références à 7 chiffres et une colonne de quantités.
+      </p>
+
+      <div class="files">
+        <div class="file-box">
+          <label for="comparisonFile">Stock à comparer</label>
+          <p class="hint">Le fichier dont vous souhaitez vérifier les quantités.</p>
+          <input id="comparisonFile" type="file" accept=".xlsx,.xls,.csv">
+        </div>
+        <div class="file-box">
+          <label for="truthFile">Fichier de vérité</label>
+          <p class="hint">Le stock de référence à utiliser pour les corrections.</p>
+          <input id="truthFile" type="file" accept=".xlsx,.xls,.csv">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="compareButton" type="button">Comparer les stocks</button>
+        <button id="exportButton" class="secondary" type="button" disabled>Exporter les différences (.xlsx)</button>
+        <button id="installButton" class="secondary" type="button" hidden>Installer l’application</button>
+      </div>
+
+      <p class="install-hint">Sur mobile, utilisez le menu de partage ou du navigateur puis « Ajouter à l’écran d’accueil ».</p>
+      <div id="message" role="status" aria-live="polite"></div>
+      <section id="results" class="results" aria-labelledby="resultsTitle" hidden>
+        <p id="resultsTitle" class="summary"></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Référence</th>
+                <th>Stock à comparer</th>
+                <th>Stock vérité</th>
+                <th>Écart (comparé - vérité)</th>
+                <th>Ajustement recommandé</th>
+                <th>État</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
