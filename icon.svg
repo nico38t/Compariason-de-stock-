@@ -1,6 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#155eef"/>
-  <path d="M136 128h154l86 86v170H136z" fill="#fff"/>
-  <path d="M290 128v86h86" fill="#dbe8ff"/>
-  <path d="M176 266h160M176 310h160M176 354h106" fill="none" stroke="#155eef" stroke-linecap="round" stroke-width="20"/>
+  <defs>
+    <linearGradient id="background" x1="42" y1="24" x2="462" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172342"/>
+      <stop offset="1" stop-color="#536dfe"/>
+    </linearGradient>
+    <linearGradient id="crystal" x1="100" y1="76" x2="410" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/>
+      <stop offset="1" stop-color="#8ce5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#background)"/>
+  <path d="M170 96h172l92 113-178 207L78 209l92-113Z" fill="#fff" fill-opacity=".08" stroke="url(#crystal)" stroke-linejoin="round" stroke-width="14"/>
+  <path d="M78 209h356M170 96l86 320 86-320M170 96l-92 113m264-113 92 113" fill="none" stroke="url(#crystal)" stroke-linejoin="round" stroke-width="11"/>
 </svg>
