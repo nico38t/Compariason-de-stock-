@@ -1,0 +1,10 @@
+﻿COMPARAISON DE FICHIERS EXCEL
+Fichier à comparer : comparaison.xlsx
+Fichier vérité : verite.xlsx
+Écart = quantité fichier à comparer - quantité fichier vérité
+Références avec différence : 3
+
+Référence	Quantité fichier à comparer	Quantité vérité	Écart	État
+A100	4	5	-1	Quantité différente
+B200	2	0	2	Absente du fichier vérité
+C300	0	7	-7	Absente du fichier à comparer
